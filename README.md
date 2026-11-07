@@ -68,6 +68,8 @@ STL files in [`stl/`](stl) are already oriented for printing.
 - Board stack: whether it shifts forward when a cable is pulled out.
 - SMA thread engagement: about 3.6 mm of free thread is left for the antenna.
 
+Planned changes after the first print are listed in [TODO.md](TODO.md).
+
 ## Editing the model
 
 The source is [`cad/xiao_wio_18650_tube_case.FCStd`](cad/xiao_wio_18650_tube_case.FCStd), FreeCAD 1.1.3. Units are millimetres.
