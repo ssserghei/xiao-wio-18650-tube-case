@@ -1,0 +1,14 @@
+# FreeCAD backups and lock files
+*.FCBak
+*.FCStd1
+*.FCStd.lock
+
+# Script output
+__pycache__/
+gui_save.log
+renders/*.log
+
+# Printer-specific output: slice the STL files for your own printer
+*.gcode
+*.bgcode
+*.3mf
