@@ -5,7 +5,7 @@ A pocket LoRa node enclosure for the **Seeed Studio XIAO nRF52840 + Wio-SX1262 k
 ![Case, antenna end](renders/rear_case_rear.png)
 ![Case, USB-C end](renders/rear_case_front.png)
 
-> **Status: prototype v2, test print in progress.** All parts pass geometric checks in FreeCAD against models of the battery, contacts and boards. Nothing has been fit-tested on real hardware yet, so expect to adjust clearances after the first print.
+> **Status: prototype v2.** The first print was assembled and almost everything fitted. The model now includes the fixes from that build: a 2 mm antenna wall, a snug antenna seat, a hex pocket for the SMA jack and a full-width wire niche. **The STL files in `stl/` predate these fixes;** they will be re-exported once the model is final.
 
 ## Features
 
@@ -24,13 +24,13 @@ A pocket LoRa node enclosure for the **Seeed Studio XIAO nRF52840 + Wio-SX1262 k
 | Seeed XIAO nRF52840 + Wio-SX1262 kit | Stack with pin headers, about 21 mm tall including 4.35 mm of pins under the Wio |
 | 18650 cell | Flat top, designed for Ø18.6 × 69.3 mm |
 | Battery contacts | AA-holder style plates, 13 mm wide: plus 12.1 mm tall, minus 10 mm tall with a conical spring. They are glued in place |
-| SMA bulkhead jack + U.FL pigtail | 1/4-36 thread (Ø6.2 mm measured), thread length at least 11 mm, 8 mm hex nut, cable up to Ø2 mm |
+| SMA bulkhead jack + U.FL pigtail | 1/4-36 thread (Ø6.2 mm measured), thread length at least 11 mm, hex flange and nut about 8 mm across flats, cable up to Ø2 mm |
 | O-ring | 29 × 1.5 mm, NBR |
 | Wire | About Ø1.5 mm insulated, for battery to XIAO; the solder wells take a Dupont crimp |
 | Glue | For the contact plates |
 | Optional: U.FL clamp | [Xiao nRF52840 & Wio-SX1262 antenna clamp](https://www.printables.com/model/1761740-xiao-nrf52840-wio-sx1262-antenna-clamp) by dreimal_8, keeps the U.FL seated |
 
-Tools: soldering iron, 8 mm socket for the SMA nut, small file.
+Tools: soldering iron, thin-walled 8 mm box spanner or nut driver (outer diameter under 9.5 mm) for the SMA nut, small file.
 
 ## Printing
 
@@ -53,7 +53,7 @@ STL files in [`stl/`](stl) are already oriented for printing.
 ## Assembly
 
 1. Solder wires to the contact tabs, drop the tabs into the wells and glue the plates to their flat walls.
-2. Feed the SMA jack from the wire channel through the rear hole and tighten the nut in its recess with an 8 mm socket.
+2. Feed the SMA jack from the wire channel through the rear hole; its hex flange drops into a 1 mm hex pocket, so it cannot turn. Tighten the nut at the bottom of the outer recess. The antenna base (Ø9.56 mm) then sits slightly tight in the same recess.
 3. Route the battery wires and the coax along the channel and up behind the boards. Solder the wires to the XIAO and plug in the U.FL.
 4. Drop the board stack into its pocket from the top, USB-C into the front window. Lay the clamp on top; its tongue closes the slot above USB-C.
 5. Fit the 29 × 1.5 mm O-ring into the groove next to the flange. Insert the battery: the node powers up.
@@ -66,7 +66,7 @@ STL files in [`stl/`](stl) are already oriented for printing.
 - USB disc: how easily it turns and whether the detents hold.
 - Minus spring at 2 mm working height: it must not bottom out.
 - Board stack: whether it shifts forward when a cable is pulled out.
-- SMA thread engagement: about 3.6 mm of free thread is left for the antenna.
+- SMA: the clamped wall is 2 mm and about 7 mm of thread is left for the antenna; the hex pocket assumes a flange about 8 mm across flats.
 
 Planned changes after the first print are listed in [TODO.md](TODO.md).
 

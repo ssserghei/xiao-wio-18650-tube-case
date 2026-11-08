@@ -118,6 +118,22 @@ def check_rear():
 check_rear()
 
 
+def check_antenna_seat():
+    """Antenna base enters its recess; the jack's hex flange has a pocket with flats up and down."""
+    y, f = value("AntennaCenterY"), value("FlangeThickness")
+    base = Part.makeCylinder(value("AntennaBaseDiameter") / 2, value("AntennaNutRecessDepth") - 0.05, App.Vector(0, y, -f))
+    assert overlap(chassis.Shape, base) < 1e-6, "antenna base does not enter the recess"
+    seat = value("WireChannelStartZ") - value("AntennaHexDepth")
+    flange = Part.makeCylinder(value("AntennaHexAcrossFlats") / 2 - 0.05, value("AntennaHexDepth") - 0.05, App.Vector(0, y, seat + 0.02))
+    assert overlap(chassis.Shape, flange) < 1e-6, "hex pocket too small"
+    wall = Part.makeCylinder(4.0, value("AntennaWallThickness") - 0.1, App.Vector(0, y, seat - value("AntennaWallThickness") + 0.05))
+    hole = Part.makeCylinder(value("AntennaHoleDiameter") / 2 + 0.05, 10, App.Vector(0, y, seat - 5))
+    assert abs(overlap(chassis.Shape, wall.cut(hole)) - wall.cut(hole).Volume) < 1e-3, "clamped wall is not solid"
+
+
+check_antenna_seat()
+
+
 def check_bayonet():
     """Lugs enter straight, then follow the helix for the whole turn without touching the slots."""
     z_axis = App.Vector(0, 0, 1)
@@ -225,10 +241,11 @@ tools = {
     "riser_to_plus_pocket": min_wall(labeled("WireRiserTool").Shape, labeled("PositivePocketTool").Shape),
 }
 nut_height = 2.0
-antenna_wall = value("FlangeThickness") - value("AntennaNutRecessDepth") + value("WireChannelStartZ")
+antenna_wall = value("FlangeThickness") - value("AntennaNutRecessDepth") + value("WireChannelStartZ") - value("AntennaHexDepth")
+assert abs(antenna_wall - value("AntennaWallThickness")) < 1e-6, antenna_wall
 free_thread = value("AntennaThreadLength") - antenna_wall - nut_height
 assert free_thread >= 3.5, free_thread
-assert value("AntennaNutRecessDepth") < value("FlangeThickness"), "recess must not cut through the flange"
+assert abs(value("AntennaCenterY")) + value("AntennaNutRecessDiameter") / 2 < value("ChassisDiameter") / 2 - 0.5, "recess too close to the outer wall"
 report = {
     "antenna_wall": round(antenna_wall, 2),
     "antenna_free_thread": round(free_thread, 2),
