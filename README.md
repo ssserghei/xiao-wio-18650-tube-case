@@ -29,7 +29,7 @@ A pocket LoRa node enclosure for the **Seeed Studio XIAO nRF52840 + Wio-SX1262 k
 - CAD to edit the model: [FreeCAD](https://www.freecad.org/downloads.php).
 
 **Electronics / электроника:**
-- XIAO nRF52840 + Wio-SX1262 kit: [Seeed Studio](https://www.seeedstudio.com/catalogsearch/result/?q=XIAO+nRF52840+Wio-SX1262).
+- XIAO nRF52840 + Wio-SX1262 kit: [Seeed Studio](https://www.seeedstudio.com) — search the shop for "XIAO nRF52840 Wio-SX1262 kit".
 - Firmware: [Meshtastic web flasher](https://flasher.meshtastic.org) or [MeshCore flasher](https://flasher.meshcore.co.uk).
 - Everything else is listed under [Parts list](#parts-list) with the sizes to search for.
 
