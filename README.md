@@ -7,6 +7,32 @@ A pocket LoRa node enclosure for the **Seeed Studio XIAO nRF52840 + Wio-SX1262 k
 
 > **Status: prototype v2.** The first print was assembled and almost everything fitted. The model now includes the fixes from that build: a 2 mm antenna wall, a snug antenna seat, a hex pocket for the SMA jack, a wire niche with side walls and a chunkier bayonet without the O-ring. **The STL files in `stl/` predate these fixes;** they will be re-exported once the model is final.
 
+## Download / Скачать
+
+> ⚠️ The STL files are from the first prototype and do not include the latest fixes yet (antenna seat, wire niche walls, chunkier bayonet). They will be updated once the model is final. / STL пока от первого прототипа, без последних правок.
+
+**Files to print** — click a link and the file downloads:
+
+| Part / Деталь | STL |
+| --- | --- |
+| Chassis / шасси | [xiao_wio_18650_tube_case_chassis.stl](https://github.com/ssserghei/xiao-wio-18650-tube-case/raw/main/stl/xiao_wio_18650_tube_case_chassis.stl) |
+| Sleeve / гильза | [xiao_wio_18650_tube_case_sleeve.stl](https://github.com/ssserghei/xiao-wio-18650-tube-case/raw/main/stl/xiao_wio_18650_tube_case_sleeve.stl) |
+| Board clamp / прижимная вставка | [xiao_wio_18650_tube_case_board_clamp.stl](https://github.com/ssserghei/xiao-wio-18650-tube-case/raw/main/stl/xiao_wio_18650_tube_case_board_clamp.stl) |
+| USB-C disc / диск USB-C | [xiao_wio_18650_tube_case_shutter.stl](https://github.com/ssserghei/xiao-wio-18650-tube-case/raw/main/stl/xiao_wio_18650_tube_case_shutter.stl) |
+
+**Everything at once / всё одним архивом:** [download ZIP](https://github.com/ssserghei/xiao-wio-18650-tube-case/archive/refs/heads/main.zip) — the STL files are in the `stl` folder inside.
+
+**To change the model / чтобы менять модель:** [xiao_wio_18650_tube_case.FCStd](https://github.com/ssserghei/xiao-wio-18650-tube-case/raw/main/cad/xiao_wio_18650_tube_case.FCStd), opens in [FreeCAD](https://www.freecad.org/downloads.php) 1.1 or newer.
+
+**Free programs / бесплатные программы:**
+- Slicer to turn STL into a print file: [PrusaSlicer](https://www.prusa3d.com/page/prusaslicer_424/) or [Cura](https://ultimaker.com/software/ultimaker-cura/).
+- CAD to edit the model: [FreeCAD](https://www.freecad.org/downloads.php).
+
+**Electronics / электроника:**
+- XIAO nRF52840 + Wio-SX1262 kit: [Seeed Studio](https://www.seeedstudio.com/catalogsearch/result/?q=XIAO+nRF52840+Wio-SX1262).
+- Firmware: [Meshtastic web flasher](https://flasher.meshtastic.org) or [MeshCore flasher](https://flasher.meshcore.co.uk).
+- Everything else is listed under [Parts list](#parts-list) with the sizes to search for.
+
 ## First prototype
 
 Printed in PETG on an Ender-3 and assembled with a real XIAO + Wio-SX1262 stack, an 18650 cell and an 868 MHz whip antenna. Almost everything fitted at the first try; the fixes it showed are already in the model.
