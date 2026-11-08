@@ -5,7 +5,7 @@ A pocket LoRa node enclosure for the **Seeed Studio XIAO nRF52840 + Wio-SX1262 k
 ![Case, antenna end](renders/rear_case_rear.png)
 ![Case, USB-C end](renders/rear_case_front.png)
 
-> **Status: prototype v2.** The first print was assembled and almost everything fitted. The model now includes the fixes from that build: a 2 mm antenna wall, a snug antenna seat, a hex pocket for the SMA jack and a full-width wire niche. **The STL files in `stl/` predate these fixes;** they will be re-exported once the model is final.
+> **Status: prototype v2.** The first print was assembled and almost everything fitted. The model now includes the fixes from that build: a 2 mm antenna wall, a snug antenna seat, a hex pocket for the SMA jack, a wire niche with side walls and a chunkier bayonet without the O-ring. **The STL files in `stl/` predate these fixes;** they will be re-exported once the model is final.
 
 ## First prototype
 
@@ -26,12 +26,12 @@ Printed in PETG on an Ender-3 and assembled with a real XIAO + Wio-SX1262 stack,
 ## Features
 
 - **Flush Ø35 mm body.** No steps or exposed thread; only a thin seam at the antenna end.
-- **Three-start helical bayonet.** A 40° turn pulls the chassis tight against the sleeve. Turn clockwise, seen from the antenna end, to close.
+- **Three-start helical bayonet, sized for coarse printers.** Lugs 2.4 mm thick and 45° wide with 0.2–0.25 mm clearance; a 40° turn pulls the chassis tight against the sleeve. Turn clockwise, seen from the antenna end, to close.
 - **USB-C behind a recessed disc.** Turn it 180° to open or close the port. Two spring detents hold each position.
 - **No power switch.** Inserting the battery powers the node.
 - **Straight antenna coax.** The board stack sits low, so the U.FL pigtail runs straight from the Wio module to the SMA connector and is not levered off by a bend.
 - **Lanyard lug** on the antenna end, Ø6 mm hole for a cord or a small carabiner.
-- **Splash resistant, not waterproof.** One O-ring seals the rear joint; the USB disc has a 0.2 mm gap.
+- **Splash resistant, not waterproof.** There is no O-ring: printed PETG is porous, so a ring would not make the case tight.
 
 ## Parts list
 
@@ -41,7 +41,6 @@ Printed in PETG on an Ender-3 and assembled with a real XIAO + Wio-SX1262 stack,
 | 18650 cell | Flat top, designed for Ø18.6 × 69.3 mm |
 | Battery contacts | AA-holder style plates, 13 mm wide: plus 12.1 mm tall, minus 10 mm tall with a conical spring. They are glued in place |
 | SMA bulkhead jack + U.FL pigtail | 1/4-36 thread (Ø6.2 mm measured), thread length at least 11 mm, hex flange and nut about 8 mm across flats, cable up to Ø2 mm |
-| O-ring | 29 × 1.5 mm, NBR |
 | Wire | About Ø1.5 mm insulated, for battery to XIAO; the solder wells take a Dupont crimp |
 | Glue | For the contact plates |
 | Optional: U.FL clamp | [Xiao nRF52840 & Wio-SX1262 antenna clamp](https://www.printables.com/model/1761740-xiao-nrf52840-wio-sx1262-antenna-clamp) by dreimal_8, keeps the U.FL seated |
@@ -70,9 +69,9 @@ STL files in [`stl/`](stl) are already oriented for printing.
 
 1. Solder wires to the contact tabs, drop the tabs into the wells and glue the plates to their flat walls.
 2. Feed the SMA jack from the wire channel through the rear hole; its hex flange drops into a 1 mm hex pocket, so it cannot turn. Tighten the nut at the bottom of the outer recess. The antenna base (Ø9.56 mm) then sits slightly tight in the same recess.
-3. Route the battery wires and the coax along the channel and up behind the boards. Solder the wires to the XIAO and plug in the U.FL.
+3. Route the battery wires and the coax along the channel and up behind the boards. Side pockets under the battery hold spare wire; their outer walls keep it in while the sleeve goes on. Solder the wires to the XIAO and plug in the U.FL.
 4. Drop the board stack into its pocket from the top, USB-C into the front window. Lay the clamp on top; its tongue closes the slot above USB-C.
-5. Fit the 29 × 1.5 mm O-ring into the groove next to the flange. Insert the battery: the node powers up.
+5. Insert the battery: the node powers up.
 6. Push the disc into the sleeve from the rear until it stops at the lip. Slide the chassis in USB end first, line up the lugs with the slots and turn 40° clockwise, seen from the antenna end, until it tightens.
 7. Turn the disc with a fingernail or a coin in its face slot: window over the port is open, 180° away is closed.
 

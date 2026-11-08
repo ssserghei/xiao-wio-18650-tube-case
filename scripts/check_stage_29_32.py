@@ -89,10 +89,11 @@ def check():
     assert overlap(channel, riser) > 1
     assert overlap(riser, labeled("BoardPocketTool").Shape) > 0
     assert overlap(labeled("AntennaHoleTool").Shape, channel) > 1, "antenna hole must open into the channel"
-    # Bore stays intact where the O-ring seals.
-    bore = Part.makeCylinder(16.2, 2.7, App.Vector(0, 0, value("ORingGrooveStartZ")))
-    assert overlap(sleeve.Shape, bore) > 0
-    assert abs(overlap(sleeve.Shape, Part.makeCylinder(16.0, 2.7, App.Vector(0, 0, value("ORingGrooveStartZ"))))) < 1e-6
+    # Wire niche keeps its side walls: the chassis surface stays closed beside the channel.
+    shell = Part.makeCylinder(15.69, 60.0, App.Vector(0, 0, 15.0)).cut(Part.makeCylinder(15.69 - value("WireNicheWall") + 0.2, 60.0, App.Vector(0, 0, 15.0)))
+    side = shell.common(Part.makeBox(30.0, 8.0, 60.0, App.Vector(-15.0, -15.0, 15.0)))
+    side = side.cut(Part.makeBox(2 * value("WireChannelWidth") / 2 + 0.2, 10.0, 60.0, App.Vector(-value("WireChannelWidth") / 2 - 0.1, -16.0, 15.0)))
+    assert abs(overlap(chassis.Shape, side) - side.Volume) < 1e-2, "wire niche side walls missing"
 
 
 check()
@@ -236,7 +237,6 @@ def min_wall(a_shape, b_shape):
 
 
 tools = {
-    "antenna_hole_to_oring": min_wall(labeled("AntennaHoleTool").Shape, labeled("ORingGrooveTool").Shape),
     "battery_to_channel": min_wall(labeled("BatteryPocketTool").Shape, labeled("WireChannelTool").Shape),
     "riser_to_plus_pocket": min_wall(labeled("WireRiserTool").Shape, labeled("PositivePocketTool").Shape),
 }
