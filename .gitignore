@@ -8,6 +8,9 @@ __pycache__/
 gui_save.log
 renders/*.log
 
+# Original full-size photos; resized copies without metadata live in media/prototype-1
+media/001_Atempt/
+
 # Printer-specific output: slice the STL files for your own printer
 *.gcode
 *.bgcode

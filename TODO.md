@@ -19,6 +19,4 @@ Changes planned after the first test print. See also *Things to check on the fir
 ## Other open items
 
 - Re-export the STL files: they predate the post-print fixes (antenna wall, antenna seat, hex pocket, wire niche).
-
 - Re-slice the sleeve with *Seam position: Rear* for a straight seam instead of a spiral.
-- Add photos of the printed and assembled case to the README.

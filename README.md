@@ -7,6 +7,22 @@ A pocket LoRa node enclosure for the **Seeed Studio XIAO nRF52840 + Wio-SX1262 k
 
 > **Status: prototype v2.** The first print was assembled and almost everything fitted. The model now includes the fixes from that build: a 2 mm antenna wall, a snug antenna seat, a hex pocket for the SMA jack and a full-width wire niche. **The STL files in `stl/` predate these fixes;** they will be re-exported once the model is final.
 
+## First prototype
+
+Printed in PETG on an Ender-3 and assembled with a real XIAO + Wio-SX1262 stack, an 18650 cell and an 868 MHz whip antenna. Almost everything fitted at the first try; the fixes it showed are already in the model.
+
+<p>
+  <img src="media/prototype-1/parts-before-assembly.jpg" width="32%" alt="Printed parts before assembly">
+  <img src="media/prototype-1/parts-wired.jpg" width="32%" alt="Chassis with contacts and wiring">
+  <img src="media/prototype-1/chassis-with-battery.jpg" width="32%" alt="Chassis with the battery in place">
+</p>
+<p>
+  <img src="media/prototype-1/usb-disc-open.jpg" width="24%" alt="USB-C disc open">
+  <img src="media/prototype-1/usb-disc-closed.jpg" width="24%" alt="USB-C disc closed">
+  <img src="media/prototype-1/usb-c-charging.jpg" width="24%" alt="Charging over USB-C">
+  <img src="media/prototype-1/assembled-in-hand.jpg" width="24%" alt="Assembled node with antenna">
+</p>
+
 ## Features
 
 - **Flush Ø35 mm body.** No steps or exposed thread; only a thin seam at the antenna end.
