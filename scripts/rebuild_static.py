@@ -196,7 +196,13 @@ def rebuild_rib_cage(doc):
     _labeled(doc, "RibCage").Shape = cage
     _labeled(doc, "SleeveRibbed").touch()
     doc.recompute()
-    # Front crest fillet: its edge number changes whenever the lattice does.
+    rebuild_front_fillet(doc)
+
+
+def rebuild_front_fillet(doc):
+    """Front crest fillet: its edge number changes whenever the sleeve topology does."""
+    crest = _num(doc, "SleeveOuterDiameter") / 2 + _num(doc, "RibHeight")
+    doc.recompute()
     rim = doc.getObject("SleeveRibRim")
     shape = rim.Base.Shape
     top = max(v.Z for v in shape.Vertexes)

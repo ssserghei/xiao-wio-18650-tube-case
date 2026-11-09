@@ -126,19 +126,20 @@ check_rear()
 
 
 def check_guard():
-    """Reverse-battery guard: a flat end stops on the ring, the plus button reaches the plate."""
+    """Reverse-battery guard: a flat end stops on the pocket wall, the plus button reaches the plate."""
     cy = value("BatteryCenterY")
     ring_face = value("RearSpace") + value("BatteryLength") + value("BatteryEndClearance")
     bump_tip = value("PositiveContactZ") - value("PositiveButtonHeight")
     assert bump_tip - ring_face >= 0.5 - 1e-6, bump_tip - ring_face
-    # Ring between the hole and the cable slot, minus the 8 mm button slot that comes down from the top.
-    ring = Part.makeCylinder(8.0, 0.5, App.Vector(0, cy, ring_face)).cut(Part.makeCylinder(5.3, 0.5, App.Vector(0, cy, ring_face)))
-    ring = ring.cut(Part.makeBox(value("ButtonSlotWidth") + 0.2, 20, 0.5, App.Vector(-value("ButtonSlotWidth") / 2 - 0.1, cy - 4.1, ring_face)))
-    assert abs(overlap(chassis.Shape, ring) - ring.Volume) < 1e-3, "guard ring is not solid"
-    button = Part.makeCylinder(value("PlusGuardHoleDiameter") / 2 - 0.1, value("PositiveContactZ") - ring_face + 0.5, App.Vector(0, cy, ring_face - 0.5))
-    assert overlap(chassis.Shape, button) < 1e-6, "plus button path blocked"
-    slide = Part.makeBox(value("PlusBumpChannelWidth") - 0.2, 20, value("PositiveButtonHeight"), App.Vector(-value("PlusBumpChannelWidth") / 2 + 0.1, cy, bump_tip + 0.02))
-    assert overlap(chassis.Shape, slide) < 1e-6, "plate bump cannot slide in from the top"
+    # Stop face: the pocket wall beside and below the plate window, where a flat battery end lands.
+    half_window = value("ContactPlateWidth") / 2 + value("ContactPocketClearance")
+    for x0 in (-8.8, half_window + 0.2):
+        stop = Part.makeBox(8.8 - half_window - 0.2, 4.0, 0.5, App.Vector(x0, cy - 2.0, ring_face))
+        assert abs(overlap(chassis.Shape, stop) - stop.Volume) < 1e-3, "no stop face beside the plus window"
+    # Nothing printed between the plate and the battery: no slot the printer cannot make.
+    w, h = value("ContactPlateWidth"), value("PositivePlateHeight")
+    window = Part.makeBox(w, h, value("PositiveContactZ") - ring_face + 0.3, App.Vector(-w / 2, cy - h / 2, ring_face - 0.3))
+    assert overlap(chassis.Shape, window) < 1e-6, "wall left in front of the plus plate"
     assert overlap(chassis.Shape, labeled("PositiveContact").Shape) < 1e-6
     # Finger scoop: the side walls at the plus end are open down to the battery axis.
     scoop = Part.makeBox(30, 1.0, 8.0, App.Vector(-15, cy + 1.3, ring_face - 11.0)).cut(Part.makeCylinder(9.6, 8.0, App.Vector(0, cy, ring_face - 11.0)))
