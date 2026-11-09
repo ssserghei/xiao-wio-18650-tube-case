@@ -51,8 +51,8 @@ Printed in PETG on an Ender-3 and assembled with a real XIAO + Wio-SX1262 stack,
 
 ## Features
 
-- **Flush Ø35 mm body.** No steps or exposed thread; only a thin seam at the antenna end.
-- **Diamond knurl grip.** A 10 mm band at each end of the sleeve, 24 diamonds around, 0.5 mm deep, for turning the bayonet with wet or gloved hands.
+- **Flush body, Ø36.6 mm over the ribs.** No steps or exposed thread; only a thin seam at the antenna end.
+- **Raised diamond lattice.** 0.8 mm ribs at 45° over the whole sleeve, about 10 mm diamonds, between solid bands at both ends. It grips like a knurl and stiffens the sleeve instead of thinning it; the rear band doubles the wall over the bayonet slots.
 - **Three-start helical bayonet, sized for coarse printers.** Lugs 2.4 mm thick and 45° wide with 0.2–0.25 mm clearance; a 40° turn pulls the chassis tight against the sleeve. Turn clockwise, seen from the antenna end, to close.
 - **USB-C behind a recessed disc.** Turn it 180° to open or close the port. Two spring detents hold each position.
 - **No power switch.** Inserting the battery powers the node.
