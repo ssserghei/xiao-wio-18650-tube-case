@@ -112,11 +112,40 @@ def check_rear():
     assert overlap(chassis.Shape, bore) < 1e-6, "lug hole blocked"
     wall = chassis.Shape.distToShape(Part.Vertex(App.Vector(0, value("LugCenterY"), -f - value("LugReach") + 0.01)))[0]
     assert wall < 0.2, "lug tip is not where expected"
-    ring = Part.makeCylinder(17.4, 1.5, App.Vector(0, 0, -1.5)).cut(Part.makeCylinder(16.6, 1.5, App.Vector(0, 0, -1.5)))
+    ring = Part.makeCylinder(15.6, 1.5, App.Vector(0, 0, -1.5)).cut(Part.makeCylinder(15.0, 1.5, App.Vector(0, 0, -1.5)))
     assert abs(overlap(chassis.Shape, ring) - ring.Volume) < 1e-3, "flange is not round where it meets the sleeve"
+    # Standing print: the flange face under the sleeve is a 45 degree cone, the sleeve skirt follows it.
+    d = value("SeamConeDepth")
+    probe = Part.makeCylinder(value("FlangeDiameter") / 2 - 0.2, 0.2, App.Vector(0, 0, -0.2)).cut(Part.makeCylinder(value("ChassisDiameter") / 2 + 0.25, 0.2, App.Vector(0, 0, -0.2)))
+    assert overlap(chassis.Shape, probe) < 1e-6, "flange cone missing"
+    assert overlap(labeled("SleeveFinal").Shape, probe) > 0.5 * probe.Volume, "sleeve skirt missing"
+    assert labeled("SleeveFinal").Shape.BoundBox.ZMin < -d + 0.05
 
 
 check_rear()
+
+
+def check_guard():
+    """Reverse-battery guard: a flat end stops on the ring, the plus button reaches the plate."""
+    cy = value("BatteryCenterY")
+    ring_face = value("RearSpace") + value("BatteryLength") + value("BatteryEndClearance")
+    bump_tip = value("PositiveContactZ") - value("PositiveButtonHeight")
+    assert bump_tip - ring_face >= 0.5 - 1e-6, bump_tip - ring_face
+    # Ring between the hole and the cable slot, minus the 8 mm button slot that comes down from the top.
+    ring = Part.makeCylinder(8.0, 0.5, App.Vector(0, cy, ring_face)).cut(Part.makeCylinder(5.3, 0.5, App.Vector(0, cy, ring_face)))
+    ring = ring.cut(Part.makeBox(value("ButtonSlotWidth") + 0.2, 20, 0.5, App.Vector(-value("ButtonSlotWidth") / 2 - 0.1, cy - 4.1, ring_face)))
+    assert abs(overlap(chassis.Shape, ring) - ring.Volume) < 1e-3, "guard ring is not solid"
+    button = Part.makeCylinder(value("PlusGuardHoleDiameter") / 2 - 0.1, value("PositiveContactZ") - ring_face + 0.5, App.Vector(0, cy, ring_face - 0.5))
+    assert overlap(chassis.Shape, button) < 1e-6, "plus button path blocked"
+    slide = Part.makeBox(value("PlusBumpChannelWidth") - 0.2, 20, value("PositiveButtonHeight"), App.Vector(-value("PlusBumpChannelWidth") / 2 + 0.1, cy, bump_tip + 0.02))
+    assert overlap(chassis.Shape, slide) < 1e-6, "plate bump cannot slide in from the top"
+    assert overlap(chassis.Shape, labeled("PositiveContact").Shape) < 1e-6
+    # Finger scoop: the side walls at the plus end are open down to the battery axis.
+    scoop = Part.makeBox(30, 1.0, 8.0, App.Vector(-15, cy + 1.3, ring_face - 11.0)).cut(Part.makeCylinder(9.6, 8.0, App.Vector(0, cy, ring_face - 11.0)))
+    assert overlap(chassis.Shape, scoop) < 1e-6, "finger scoop missing"
+
+
+check_guard()
 
 
 def check_antenna_seat():
@@ -168,11 +197,12 @@ def check_contacts():
     neg_z, pos_z = value("NegativeContactZ"), value("PositiveContactZ")
     battery_rear = battery.Shape.BoundBox.ZMin
     battery_front = battery.Shape.BoundBox.ZMax
-    assert abs(neg_z - (battery_rear - 2.0)) < 1e-6, "spring gap must be 2 mm"
+    assert abs(neg_z - (battery_rear - value("SpringWorkingHeight"))) < 1e-6, "spring gap must match SpringWorkingHeight"
+    assert value("SpringWorkingHeight") >= 2.5 - 1e-6, "spring gap must stay at least 2.5 mm"
     rear_gap = Part.makeBox(w, neg_h, battery_rear - neg_z, App.Vector(-w / 2, y - neg_h / 2, neg_z))
     assert overlap(chassis.Shape, rear_gap) < 1e-6, "wall left in front of the minus plate"
-    front_gap = Part.makeBox(w, pos_h, pos_z - battery_front, App.Vector(-w / 2, y - pos_h / 2, battery_front))
-    assert overlap(chassis.Shape, front_gap) < 1e-6, "wall left in front of the plus plate"
+    # In front of the plus plate stands the guard ring on purpose; check_guard keeps its hole open.
+    assert battery_front < pos_z - value("PositiveButtonHeight") - value("PlusContactRecess") + 1e-6
     for plate, z_back in ((labeled("NegativeContact"), neg_z - value("NegativePocketDepth") - 0.11), (labeled("PositiveContact"), pos_z + value("PositivePocketDepth") + 0.01)):
         b = plate.Shape.BoundBox
         behind = Part.makeBox(b.XLength, b.YLength, 0.1, App.Vector(b.XMin, b.YMin, z_back))

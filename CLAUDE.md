@@ -31,9 +31,10 @@ The exit code is always 0. A script passed only if its `<NAME>_CHECK=` line appe
 - **Printed parts:** `ChassisFinal`, `SleeveFinal`, `BoardClamp`, `Shutter`.
 - **Dummies:** `Battery`, `Electronics`, `BoardStackModel` (CC0 model by zuberio; two PCB solids are invalid, test them by bounding box), `AntennaCable` (static spline), `NegativeContact`, `PositiveContact`, `SpringEnvelope`.
 - **Chassis:** a linear chain of Part booleans ending in `ChassisFinal`; `ChassisBlank` fuses `ChassisCore` with the filleted `RearBody`.
-- **Not parametric:** bayonet lugs and slots (`BayonetLugShape*`, `BayonetSlotShapes`) are static helical lofts. The `RearBody` and `SleeveFinal` fillets store edge numbers, so re-pick them (see `round_pass` in `scripts/apply_strong_bayonet.py`) when those shapes change.
+- **Static shapes:** bayonet lugs and slots, `RibCage`, `AntennaCable`, `ChassisMarkTool` and `SleeveMarkTool` are computed, and the rear-body and front-crest fillets store edge numbers. `scripts/rebuild_static.py` rebuilds all of them from the sheet; other scripts import it (`rebuild_all`, `rebuild_rib_cage`, ...). Run it after any parameter change that touches them.
 - **Finding objects:** internal names are generic; look objects up with `doc.getObjectsByLabel("...")[0]`.
-- **Sleeve chain end:** `SleeveNotched` → `SleeveRibbed` (fuse with `RibCage`, a static 0.8 mm shell with 231 diamond windows) → `SleeveFinal` (fillet on the front crest edge, stored by edge number).
-- **Lattice method:** cut disjoint prism windows from one shell. Sweeping crossing helical ribs took 16 minutes and gave an invalid solid.
-- **Slow checks:** `check_stage_29_32.py` takes about 7 minutes; run it in the background.
+- **Sleeve chain end:** `SleeveLipped` also fuses `SleeveConeRing`, the skirt over the flange cone. `SleeveNotched` → `SleeveRibbed` (fuse with `RibCage`) → `SleeveRibRim` (front crest fillet, by edge number) → object `SleeveMarked`, labelled `SleeveFinal` (lock line).
+- **Chassis additions:** `ChassisSeamCone` sits between `ChassisBlank` and `ChassisBore`; `ChassisFingerNotch` and `ChassisMarks` sit right before `ChassisFinal`. `ChassisPositiveFace` cuts `PlusGuardTool` (Ø10 hole plus a 7 mm bump channel, which the older 8 mm `ButtonSlot` already covers).
+- **Lattice method:** cut disjoint windows from one shell; each window is a ruled loft between two rounded rhombi, wider outside (draft) and scaled with the radius. Sweeping crossing helical ribs took 16 minutes and gave an invalid solid.
+- **Slow checks:** `check_stage_29_32.py` takes about 7 minutes, `rebuild_static.py` about 4, `apply_guard_marks.py` about 5; run them in the background.
 - **History:** `scripts/apply_*.py` record the build in order and cannot be replayed on the finished file.

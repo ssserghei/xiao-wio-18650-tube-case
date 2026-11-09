@@ -52,7 +52,10 @@ Printed in PETG on an Ender-3 and assembled with a real XIAO + Wio-SX1262 stack,
 ## Features
 
 - **Flush body, Ø36.6 mm over the ribs.** No steps or exposed thread; only a thin seam at the antenna end.
-- **Raised diamond lattice.** 0.8 mm ribs at 45° over the whole sleeve, about 10 mm diamonds, between solid bands at both ends. It grips like a knurl and stiffens the sleeve instead of thinning it; the rear band doubles the wall over the bayonet slots.
+- **Raised diamond lattice.** 0.8 mm ribs at 45° over the sleeve, six large diamonds around, between solid bands at both ends. Cells have rounded corners and 30° walls, so dirt wipes out instead of packing into corners. It grips like a knurl and stiffens the sleeve; the rear band doubles the wall over the bayonet slots.
+- **Reverse-battery guard.** The plus plate sits 0.5 mm behind a ring with a Ø10 mm hole. A battery put in backwards rests its flat end on the ring and does not touch the plate; the plus button of a button-top cell reaches it through the hole. Flat-top cells will not make contact.
+- **Polarity and position marks.** "+" and "−" engraved on both sides of the chassis by the contacts. A line on the sleeve meets one groove on the flange when locked and two grooves when it is time to push the sleeve on or pull it off.
+- **Finger scoop** at the plus end of the battery window, for lifting the cell out.
 - **Three-start helical bayonet, sized for coarse printers.** Lugs 2.4 mm thick and 45° wide with 0.2–0.25 mm clearance; a 40° turn pulls the chassis tight against the sleeve. Turn clockwise, seen from the antenna end, to close.
 - **USB-C behind a recessed disc.** Turn it 180° to open or close the port. Two spring detents hold each position.
 - **No power switch.** Inserting the battery powers the node.
@@ -89,7 +92,7 @@ STL files in [`stl/`](stl) are already oriented for printing.
 
 - **Material:** PETG. Clearances are 0.3 mm per side.
 - **Print order:** the clamp and the disc first. They are quick and show whether the clearances suit your printer.
-- **Chassis:** touches the bed only along the flange edge, so watch the first layers. Supports fill the wire channel underneath and have to be broken out.
+- **Chassis:** print it standing on its USB end, without supports. The flange face under the sleeve is a 45° cone for this. Inside, the ends of the battery and board pockets and the plate slots print as bridges of up to about 21 mm: keep bridging enabled and check them in the layer preview.
 - **Sleeve:** tall and thin-walled (1.5 mm). Keep the speed moderate. Set *Seam position* to *Rear* for one straight seam line instead of a spiral.
 
 ## Assembly
@@ -119,7 +122,7 @@ The source is [`cad/xiao_wio_18650_tube_case.FCStd`](cad/xiao_wio_18650_tube_cas
 - **Axes:** Z runs from the antenna end (negative Z, flange and lug) to the USB end. +Y is up, the side where the battery and boards are inserted.
 - **Parameters:** most dimensions live in the `Parameters` spreadsheet and drive the parts through expressions. Change a value there and recompute.
 - **Printed parts:** `ChassisFinal`, `SleeveFinal`, `BoardClamp`, `Shutter`. Everything else is a cutting tool or a reference dummy.
-- **Not parametric:** the helical bayonet lugs and slots are static shapes, and the fillets on the rear body and sleeve rim refer to edge numbers. After a change that alters those shapes, rebuild them with the logic in `scripts/apply_strong_bayonet.py`.
+- **Static shapes:** the helical bayonet, the rib lattice, the antenna cable dummy and the marks are computed shapes, and some fillets refer to edge numbers. After changing a parameter, run `scripts/rebuild_static.py` with `freecadcmd`: it rebuilds all of them from the sheet and saves.
 
 Scripts in [`scripts/`](scripts) run with FreeCAD's console:
 
