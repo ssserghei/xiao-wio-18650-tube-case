@@ -33,4 +33,6 @@ The exit code is always 0. A script passed only if its `<NAME>_CHECK=` line appe
 - **Chassis:** a linear chain of Part booleans ending in `ChassisFinal`; `ChassisBlank` fuses `ChassisCore` with the filleted `RearBody`.
 - **Not parametric:** bayonet lugs and slots (`BayonetLugShape*`, `BayonetSlotShapes`) are static helical lofts. The `RearBody` and `SleeveFinal` fillets store edge numbers, so re-pick them (see `round_pass` in `scripts/apply_strong_bayonet.py`) when those shapes change.
 - **Finding objects:** internal names are generic; look objects up with `doc.getObjectsByLabel("...")[0]`.
+- **Sleeve chain end:** `SleeveFinal` is now the knurl cut (`KnurlTool`, a static compound of 96 helical grooves); the rim fillet below it is labelled `SleeveRim`. A script that re-picks the rim edges must use `SleeveRim`.
+- **Slow checks:** with the knurl, `check_stage_29_32.py` takes about 10 minutes and `apply_knurl.py` about 4; run them in the background.
 - **History:** `scripts/apply_*.py` record the build in order and cannot be replayed on the finished file.
