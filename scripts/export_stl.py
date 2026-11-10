@@ -22,7 +22,7 @@ X = App.Vector(1, 0, 0)
 ORIGIN = App.Vector(0, 0, 0)
 # label -> (file suffix, rotation about X in degrees)
 PARTS = {
-    "ChassisFinal": ("chassis", 90),   # window up: contact slots stay vertical walls
+    "ChassisFinal": ("chassis", 180),  # standing on the USB end: the flange cone needs no support
     "SleeveFinal": ("sleeve", 180),    # standing, lip on the bed: no overhang, round bore
     "BoardClamp": ("board_clamp", 90), # flat pressing face on the bed
     "Shutter": ("shutter", 0),         # flange on the bed: face down leaves the flange unsupported

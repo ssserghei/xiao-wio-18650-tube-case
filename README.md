@@ -5,11 +5,9 @@ A pocket LoRa node enclosure for the **Seeed Studio XIAO nRF52840 + Wio-SX1262 k
 ![Case, antenna end](renders/rear_case_rear.png)
 ![Case, USB-C end](renders/rear_case_front.png)
 
-> **Status: prototype v2.** The first print was assembled and almost everything fitted. The model now includes the fixes from that build: a 2 mm antenna wall, a snug antenna seat, a hex pocket for the SMA jack, a wire niche with side walls and a chunkier bayonet without the O-ring. **The STL files in `stl/` predate these fixes;** they will be re-exported once the model is final.
+> **Status: prototype v3, not printed yet.** The first print was assembled and almost everything fitted. The STL files in `stl/` now carry every fix since: 2 mm antenna wall and hex SMA pocket, wire niche walls, chunkier bayonet without the O-ring, raised rib lattice, reverse-battery guard, polarity and lock marks, bigger shutter detents, a front wall right at the boards and a chassis that prints standing.
 
 ## Download / Скачать
-
-> ⚠️ The STL files are from the first prototype and do not include the latest fixes yet (antenna seat, wire niche walls, chunkier bayonet). They will be updated once the model is final. / STL пока от первого прототипа, без последних правок.
 
 **Files to print** — click a link and the file downloads:
 
@@ -85,8 +83,8 @@ STL files in [`stl/`](stl) are already oriented for printing.
 | --- | --- | --- | --- | --- |
 | `…_board_clamp.stl` | flat side down | none | 17 min | 2 g |
 | `…_shutter.stl` (USB disc) | flange down | none | 14 min | 2 g |
-| `…_sleeve.stl` | inner lip down | none, 6 mm brim | 3 h 17 min | 22 g |
-| `…_chassis.stl` | lying, battery window up | from build plate only, 6 mm brim | 4 h 33 min | 41 g |
+| `…_sleeve.stl` | front end (inner lip) down | none, 6 mm brim, seam at rear | 4 h 12 min | 29 g |
+| `…_chassis.stl` | standing on the USB-C end | none, 8 mm brim | 4 h 18 min | 32 g |
 
 \*PrusaSlicer 2.9.6, Creality Ender-3, 0.4 mm nozzle, 0.2 mm layers, Generic PETG (240/70 °C).
 
