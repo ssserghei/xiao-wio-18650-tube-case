@@ -41,7 +41,7 @@ clamp = labeled("BoardClamp")
 shutter = labeled("Shutter")
 battery = labeled("Battery")
 electronics = labeled("Electronics")
-dummies = [battery, electronics, labeled("NegativeContact"), labeled("PositiveContact"), labeled("SpringEnvelope")]
+dummies = [battery, labeled("BatteryButton"), electronics, labeled("USBConnector"), labeled("NegativeContact"), labeled("PositiveContact"), labeled("SpringEnvelope")]
 printed = [chassis, sleeve, clamp, shutter]
 
 
@@ -52,7 +52,7 @@ def value(alias):
 def plug_box():
     w, h = value("USBPlugWidth"), value("USBPlugHeight")
     length = value("SleeveLength")
-    z = electronics.Shape.BoundBox.ZMax
+    z = labeled("USBConnector").Shape.BoundBox.ZMax  # the plug starts at the connector tip
     plug = Part.makeBox(w, h, length + 15 - z, App.Vector(-w / 2, value("USBCenterY") - h / 2, z))
     sides = [e for e in plug.Edges if e.BoundBox.XLength < 1e-6 and e.BoundBox.YLength < 1e-6]
     return plug.makeFillet(1.0, sides)  # moulded plug bodies have rounded corners
@@ -128,9 +128,12 @@ check_rear()
 def check_guard():
     """Reverse-battery guard: a flat end stops on the pocket wall, the plus button reaches the plate."""
     cy = value("BatteryCenterY")
-    ring_face = value("RearSpace") + value("BatteryLength") + value("BatteryEndClearance")
+    ring_face = value("BatteryPocketEndZ")
     bump_tip = value("PositiveContactZ") - value("PositiveButtonHeight")
-    assert bump_tip - ring_face >= 0.5 - 1e-6, bump_tip - ring_face
+    assert bump_tip - ring_face >= 1.0 - 1e-6, bump_tip - ring_face
+    # The measured button tip arrives exactly at the plate bump: the spring keeps its working height.
+    assert abs(value("RearSpace") + value("BatteryLength") - bump_tip) < 1e-6
+    assert abs(labeled("BatteryButton").Shape.BoundBox.ZMax - bump_tip) < 1e-6
     # Stop face: the pocket wall beside and below the plate window, where a flat battery end lands.
     half_window = value("ContactPlateWidth") / 2 + value("ContactPocketClearance")
     for x0 in (-8.8, half_window + 0.2):
@@ -226,9 +229,18 @@ def check_cable():
     for solid in stack.Solids:
         if solid.isValid():
             closed.append(solid)
-        else:  # mesh-derived PCBs can be invalid; their bounding box is the stricter test
+        else:  # mesh-derived PCBs can be invalid: test their bounding box, split where the
+            # full-width board ends and only the narrow USB-C pads go on
             b = solid.BoundBox
-            closed.append(Part.makeBox(b.XLength, b.YLength, b.ZLength, App.Vector(b.XMin, b.YMin, b.ZMin)))
+            points = [v.Point for v in solid.Vertexes]
+            wide = [p for p in points if abs(p.x) > 5]
+            z_full = max(p.z for p in wide) if wide else b.ZMax
+            closed.append(Part.makeBox(b.XLength, b.YLength, z_full - b.ZMin, App.Vector(b.XMin, b.YMin, b.ZMin)))
+            rest = [p for p in points if p.z > z_full]
+            if rest:
+                lo = [min(getattr(p, a) for p in rest) for a in "xyz"]
+                hi = [max(getattr(p, a) for p in rest) for a in "xyz"]
+                closed.append(Part.makeBox(hi[0] - lo[0], max(hi[1] - lo[1], 0.01), hi[2] - z_full, App.Vector(lo[0], lo[1], z_full)))
     assert len(closed) >= 30, len(closed)
     for part in printed:
         for piece in closed:

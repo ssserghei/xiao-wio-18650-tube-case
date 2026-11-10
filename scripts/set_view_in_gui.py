@@ -23,6 +23,7 @@ STYLE = {
     "BoardClamp": ((0.95, 0.60, 0.15), 0),
     "Shutter": ((0.30, 0.45, 0.85), 40),
     "Battery": ((0.30, 0.70, 0.35), 0),
+    "BatteryButton": ((0.30, 0.70, 0.35), 0),
     "BoardStackModel": ((0.15, 0.45, 0.30), 0),
     "NegativeContact": ((0.75, 0.75, 0.75), 0),
     "PositiveContact": ((0.75, 0.75, 0.75), 0),

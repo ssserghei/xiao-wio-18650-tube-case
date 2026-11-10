@@ -29,7 +29,7 @@ The exit code is always 0. A script passed only if its `<NAME>_CHECK=` line appe
 - **Axes:** Z from the antenna end (negative Z: flange and lug) to the USB end. +Y is up, where the battery and boards go in. The battery axis is at `BatteryCenterY`; the board stack is placed by `WioBottomY` and `StackTopY`.
 - **Parameters:** the `Parameters` spreadsheet, aliases on column B. Add new dimensions there, not as literals.
 - **Printed parts:** `ChassisFinal`, `SleeveFinal`, `BoardClamp`, `Shutter`.
-- **Dummies:** `Battery`, `Electronics`, `BoardStackModel` (CC0 model by zuberio; two PCB solids are invalid, test them by bounding box), `AntennaCable` (static spline), `NegativeContact`, `PositiveContact`, `SpringEnvelope`.
+- **Dummies:** `Battery`, `Electronics`, `BoardStackModel` (CC0 model by zuberio; two PCB solids are invalid, test them by bounding box), `AntennaCable` (static spline), `BatteryButton` (measured plus button), `USBConnector` (the USB-C beyond the PCBs; the plug path starts at its tip), `NegativeContact`, `PositiveContact`, `SpringEnvelope`.
 - **Chassis:** a linear chain of Part booleans ending in `ChassisFinal`; `ChassisBlank` fuses `ChassisCore` with the filleted `RearBody`.
 - **Static shapes:** bayonet lugs and slots, `RibCage`, `AntennaCable`, `ChassisMarkTool` and `SleeveMarkTool` are computed, and the rear-body and front-crest fillets store edge numbers. `scripts/rebuild_static.py` rebuilds all of them from the sheet; other scripts import it (`rebuild_all`, `rebuild_rib_cage`, ...). Run it after any parameter change that touches them.
 - **Finding objects:** internal names are generic; look objects up with `doc.getObjectsByLabel("...")[0]`.

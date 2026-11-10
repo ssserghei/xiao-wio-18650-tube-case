@@ -36,6 +36,7 @@ PARTS = (
     ("BoardClamp", "#f09a30", "#8a5510", 1.0),
     ("Shutter", "#5a78d8", "#26408f", 1.0),
     ("Battery", "#6fb36f", "#2f6b2f", 0.55),
+    ("BatteryButton", "#6fb36f", "#2f6b2f", 0.55),
     ("BoardStackModel", "#2f8f60", "#14523a", 0.9),
     ("NegativeContact", "#d04040", "#d04040", 1.0),
     ("PositiveContact", "#d04040", "#d04040", 1.0),
