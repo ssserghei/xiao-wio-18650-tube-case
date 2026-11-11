@@ -49,7 +49,7 @@ Printed in PETG on an Ender-3 and assembled with a real XIAO + Wio-SX1262 stack,
 
 ## Features
 
-- **Flush body, Ø36.6 mm over the ribs.** No steps or exposed thread; only a thin seam at the antenna end.
+- **Flush body, Ø35.4 mm over the ribs.** No steps or exposed thread; only a thin seam at the antenna end.
 - **Raised diamond lattice.** 0.8 mm ribs at 45° over the sleeve, six large diamonds around, between solid bands at both ends. Cells have rounded corners and 30° walls, so dirt wipes out instead of packing into corners. It grips like a knurl and stiffens the sleeve; the rear band doubles the wall over the bayonet slots.
 - **Reverse-battery guard.** The pocket ends at the cell's shoulder; the plus plate is glued 1 mm deeper, in an open window narrower than the cell. A battery put in backwards rests its flat end on the wall beside the window and does not touch the plate; the plus button reaches it. Sized for a button that stands 1.32 mm proud (`BatteryButtonHeight`): measure yours, it must be higher than about 1.1 mm. Flat-top cells will not make contact.
 - **Polarity and position marks.** "+" and "−" engraved on both sides of the chassis by the contacts. A line on the sleeve meets one groove on the flange when locked and two grooves when it is time to push the sleeve on or pull it off.
@@ -83,15 +83,15 @@ STL files in [`stl/`](stl) are already oriented for printing.
 | --- | --- | --- | --- | --- |
 | `…_board_clamp.stl` | flat side down | none | 17 min | 2 g |
 | `…_shutter.stl` (USB disc) | flange down | none | 14 min | 2 g |
-| `…_sleeve.stl` | front end (inner lip) down | none, 6 mm brim, seam at rear | 4 h 12 min | 29 g |
-| `…_chassis.stl` | standing on the USB-C end | none, 8 mm brim | 4 h 18 min | 32 g |
+| `…_sleeve.stl` | front end (inner lip) down | none, 6 mm brim, 5 perimeters, avoid crossing perimeters | 3 h 46 min | 20 g |
+| `…_chassis.stl` | standing on the USB-C end | none, 8 mm brim | 4 h 17 min | 32 g |
 
 \*PrusaSlicer 2.9.6, Creality Ender-3, 0.4 mm nozzle, 0.2 mm layers, Generic PETG (240/70 °C).
 
 - **Material:** PETG. Clearances are 0.3 mm per side.
 - **Print order:** the clamp and the disc first. They are quick and show whether the clearances suit your printer.
 - **Chassis:** print it standing on its USB end, without supports. The flange face under the sleeve is a 45° cone for this. Inside, the ends of the battery and board pockets and the plate slots print as bridges of up to about 21 mm: keep bridging enabled and check them in the layer preview.
-- **Sleeve:** tall and thin-walled (1.5 mm). Keep the speed moderate. Set *Seam position* to *Rear* for one straight seam line instead of a spiral.
+- **Sleeve:** tall and thin-walled (0.9 mm in the cells, 1.7 mm over the ribs). Turn on *Avoid crossing perimeters* and use 5 perimeters: the nozzle then runs round the wall instead of jumping across the tube, which strings PETG into a web inside. *Seam position: Rear* gives one straight seam line.
 
 ## Assembly
 

@@ -190,7 +190,9 @@ def rebuild_rib_cage(doc):
             normal, tangent = V(math.cos(theta), math.sin(theta), 0), V(-math.sin(theta), math.cos(theta), 0)
             windows.append(Part.makeLoft([_window_wire(outer, normal, tangent, d_out, zc),
                                           _window_wire(inner, normal, tangent, d_in, zc)], True, True))
-    shell = Part.makeCylinder(crest, end).cut(Part.makeCylinder(radius - 0.3, end))
+    # The shell overlaps the sleeve wall by 0.1 mm only: deeper, it would refill the bayonet
+    # grooves (BayonetGrooveRadius) and shutter notches (DiscNotchRadius) cut before it.
+    shell = Part.makeCylinder(crest, end).cut(Part.makeCylinder(radius - 0.1, end))
     cage = shell.cut(Part.makeCompound(windows)).removeSplitter()
     assert cage.isValid() and len(cage.Solids) == 1, "rib cage"
     _labeled(doc, "RibCage").Shape = cage
