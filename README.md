@@ -47,6 +47,22 @@ Printed in PETG on an Ender-3 and assembled with a real XIAO + Wio-SX1262 stack,
   <img src="media/prototype-1/assembled-in-hand.jpg" width="24%" alt="Assembled node with antenna">
 </p>
 
+## Second prototype
+
+The lattice sleeve with its print skirt, the chassis with the cell, boards and wiring in place, and the USB-C disc.
+
+<p>
+  <img src="media/prototype-2/sleeve-printed.jpg" width="24%" alt="Printed lattice sleeve">
+  <img src="media/prototype-2/chassis-with-battery-and-boards.jpg" width="24%" alt="Chassis with the battery and the board stack">
+  <img src="media/prototype-2/chassis-top-with-battery.jpg" width="24%" alt="Chassis from the top with the battery and boards inside">
+  <img src="media/prototype-2/chassis-wiring.jpg" width="24%" alt="Wiring on the underside of the chassis">
+</p>
+<p>
+  <img src="media/prototype-2/assembled-with-antenna.jpg" width="32%" alt="Assembled node with antenna">
+  <img src="media/prototype-2/usb-disc-open.jpg" width="32%" alt="USB-C disc open">
+  <img src="media/prototype-2/usb-disc-closed.jpg" width="32%" alt="USB-C disc closed">
+</p>
+
 ## Features
 
 - **Flush body, Ø35.4 mm over the ribs.** No steps or exposed thread; only a thin seam at the antenna end.

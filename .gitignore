@@ -10,6 +10,7 @@ renders/*.log
 
 # Original full-size photos; resized copies without metadata live in media/prototype-1
 media/001_Atempt/
+media/prototype-2/IMG_*.jpg
 
 # Printer-specific output: slice the STL files for your own printer
 *.gcode
